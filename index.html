@@ -23,9 +23,24 @@
 <body>
 <div class="router"></div>
 <script>
-    document.addEventListener("keydown", function(event) {
-        moveRouter(event.key);
-    });
+    // Check if the user is on a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Mobile controls: arrows
+        document.addEventListener("keydown", function(event) {
+            moveRouter(event.key);
+        });
+    } else {
+        // Desktop controls: WASD or arrows
+        document.addEventListener("keydown", function(event) {
+            const key = event.key.toLowerCase();
+            if (key === "w" || key === "a" || key === "s" || key === "d" ||
+                key === "arrowup" || key === "arrowdown" || key === "arrowleft" || key === "arrowright") {
+                moveRouter(event.key);
+            }
+        });
+    }
 
     function moveRouter(direction) {
         const router = document.querySelector(".router");
@@ -35,15 +50,19 @@
 
         switch(direction) {
             case "ArrowUp":
+            case "w":
                 currentPositionTop -= step;
                 break;
             case "ArrowDown":
+            case "s":
                 currentPositionTop += step;
                 break;
             case "ArrowLeft":
+            case "a":
                 currentPositionLeft -= step;
                 break;
             case "ArrowRight":
+            case "d":
                 currentPositionLeft += step;
                 break;
         }
