@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gra Router</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .router {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+</head>
+<body>
+<div class="router"></div>
+<script>
+    document.addEventListener("keydown", function(event) {
+        moveRouter(event.key);
+    });
+
+    function moveRouter(direction) {
+        const router = document.querySelector(".router");
+        let currentPositionTop = parseInt(router.style.top) || 0;
+        let currentPositionLeft = parseInt(router.style.left) || 0;
+        const step = 20;
+
+        switch(direction) {
+            case "ArrowUp":
+                currentPositionTop -= step;
+                break;
+            case "ArrowDown":
+                currentPositionTop += step;
+                break;
+            case "ArrowLeft":
+                currentPositionLeft -= step;
+                break;
+            case "ArrowRight":
+                currentPositionLeft += step;
+                break;
+        }
+
+        router.style.top = currentPositionTop + "px";
+        router.style.left = currentPositionLeft + "px";
+    }
+</script>
+</body>
+</html>
